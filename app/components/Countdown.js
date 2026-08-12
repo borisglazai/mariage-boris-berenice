@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const CIBLE = new Date("2026-10-03T15:00:00-04:00").getTime();
+const CIBLE = new Date("2026-10-03T12:00:00-04:00").getTime();
 
 function computeParts() {
   let d = Math.max(0, CIBLE - Date.now());

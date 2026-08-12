@@ -17,7 +17,7 @@ const figtree = Figtree({
 export const metadata = {
   title: "Boris & Bérénice — 3 octobre 2026",
   description:
-    "Boris et Bérénice se marient le 3 octobre 2026 à Ottawa. Toutes les infos et le formulaire RSVP.",
+    "Boris et Bérénice se marient le 3 octobre 2026 à Ottawa et Bourget. Toutes les informations et le formulaire de réponse.",
 };
 
 export default function RootLayout({ children }) {
