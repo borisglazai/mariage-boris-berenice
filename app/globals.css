@@ -1,0 +1,90 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5ead8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  color: #201e1d;
+  background: #f5ead8;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: #a05426;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #7a8a5e;
+}
+
+::selection {
+  background: #eccfae;
+}
+
+:focus-visible {
+  outline: 2px solid #c67139;
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.btn-fill {
+  background: #c67139;
+}
+.btn-fill:hover {
+  background: #a05426;
+}
+
+.btn-outline {
+  background: transparent;
+}
+.btn-outline:hover {
+  background: #eccfae;
+}
+
+.btn-outline-dark {
+  background: transparent;
+}
+.btn-outline-dark:hover {
+  background: #2a2622;
+}
+
+@media (max-width: 860px) {
+  .row2 {
+    grid-template-columns: 1fr !important;
+  }
+  .row3 {
+    grid-template-columns: 1fr !important;
+  }
+  .heroGrid {
+    grid-template-columns: 1fr !important;
+  }
+  .navLinks {
+    display: none !important;
+  }
+  .pad {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .bigName {
+    font-size: 15vw !important;
+  }
+}
