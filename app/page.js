@@ -116,7 +116,7 @@ const FAQ = [
   },
   {
     q: "Photos pendant la cérémonie ?",
-    a: "Téléphones rangés pendant les vœux, puis photographiez autant que vous voulez. Partagez vos photos avec #BorisBerenice2026.",
+    a: "Photographiez autant que vous voulez, et partagez-nous vos clichés après ! Une seule règle : notre photographe et notre vidéaste officiels ont la priorité. Si vous vous retrouvez épaule contre épaule avec eux pour le même angle, laissez-leur la place ne leur faites pas concurrence, ils sont armés d'objectifs plus gros que les vôtres. #BorisBerenice2026.",
   },
   {
     q: "Y a-t-il des restrictions à la salle ?",
@@ -327,32 +327,10 @@ export default function Home() {
             <h2 style={h2}>Ce que Dieu a uni</h2>
             <div style={{ display: "grid", gap: 18, maxWidth: "62ch", fontSize: 17, lineHeight: 1.65, color: "#4a423a" }}>
               <p style={{ margin: 0 }}>
-                On peut reprocher bien des choses aux réseaux sociaux. On peut dire qu&apos;ils nous
-                éloignent, qu&apos;ils nous distraient, qu&apos;ils nous volent nos heures. Mais il
-                faut avouer une chose : Dieu ne se laisse enfermer par aucun de nos jugements. Il se
-                sert de tout — même de ce qu&apos;on critique, même d&apos;un écran — pour rassembler
-                ceux qu&apos;Il a destinés l&apos;un à l&apos;autre.
-              </p>
-              <p style={{ margin: 0 }}>
                 Notre histoire n&apos;a pas commencé sous un ciel étoilé, ni au détour d&apos;une
-                rue. Elle a commencé par un geste tout simple : <strong>il a fait le premier pas</strong>.
+                rue. Elle a commencé par un geste tout simple : <strong>il a fait le premier pas.</strong>{" "}
                 Une demande d&apos;amitié envoyée sur Facebook, puis un message sur Messenger pour
-                oser entamer la conversation. Rien de tapageur, rien de forcé — juste un homme qui
-                prend l&apos;initiative avec respect. Un vrai gentleman, dès la première ligne.
-              </p>
-              <p style={{ margin: 0 }}>Et il faut croire que le Ciel guidait déjà cette main-là.</p>
-              <p style={{ margin: 0 }}>
-                Car de ce jour, quelque chose s&apos;est mis en marche et ne s&apos;est plus jamais
-                arrêté. Des messages, puis des conversations. Des conversations, puis des
-                confidences. Des confidences, puis des prières partagées, des silences apaisants,
-                des projets murmurés à voix basse. Chaque échange nous rapprochait un peu plus, sans
-                que nous sachions vraiment où tout cela nous menait — mais Lui le savait déjà.
-              </p>
-              <p style={{ margin: 0 }}>
-                Il y a des rencontres qui n&apos;en sont pas. Ce sont des retrouvailles. Comme si,
-                avant même que nous existions, nos deux vies avaient été écrites pour se rejoindre à
-                cet endroit précis, à cette heure précise. Nous n&apos;avons rien construit seuls :
-                nous avons simplement dit oui, jour après jour, à ce que Dieu avait déjà préparé.
+                oser entamer la conversation.
               </p>
               <p style={{ margin: 0 }}>
                 Aujourd&apos;hui, les kilomètres qui nous séparaient s&apos;effacent. Ce premier
@@ -361,7 +339,7 @@ export default function Home() {
               </p>
               <p style={{ margin: 0 }}>
                 Nous ne pouvons que rendre grâce. Ce n&apos;est ni notre mérite, ni notre
-                intelligence, ni le hasard d&apos;un algorithme. C&apos;est la grâce — cette grâce
+                intelligence, ni le hasard d&apos;un algorithme. C&apos;est la grâce, cette grâce
                 qui prend nos chemins les plus banals pour y écrire ses plus belles histoires.
               </p>
               <p style={{ margin: "8px 0 0", fontFamily: "var(--font-caprasimo), serif", fontSize: 21, lineHeight: 1.4, color: "#a05426" }}>
@@ -480,7 +458,7 @@ export default function Home() {
             <div>
               <p style={{ margin: 0, fontWeight: 700, fontSize: 16 }}>Depuis Ottawa</p>
               <p style={{ margin: "5px 0 0", fontSize: 16, lineHeight: 1.55, color: "#4a423a" }}>
-                Bourget se trouve à une cinquantaine de kilomètres à l&apos;est du centre-ville. Le
+                Bourget se trouve à une trentaine de kilomètres à l&apos;est du centre-ville. Le
                 service Uber y est limité : prévoyez un véhicule ou un covoiturage.
               </p>
             </div>
@@ -494,7 +472,7 @@ export default function Home() {
             <p style={{ ...eyebrow, color: "#9db07a" }}>Dress code</p>
             <h2 style={{ ...h2, margin: "0 0 20px", color: "#f5ead8" }}>Tenue de ville, élégance chaleureuse</h2>
             <p style={{ margin: "0 0 14px", fontSize: 18, lineHeight: 1.6, color: "#ded1bb", maxWidth: "48ch" }}>
-              Élégant sans être guindé. Nous aimons les tons d&apos;automne : terracotta, sauge,
+              Élégant sans être coincé. Nous aimons les tons d&apos;automne : terracotta, sauge,
               crème, brun chaud, doré.
             </p>
             <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: "#ded1bb", maxWidth: "48ch" }}>
@@ -614,7 +592,7 @@ export default function Home() {
               Une question ? Écrivez-nous
             </h2>
             <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: "#ded1bb", maxWidth: "46ch" }}>
-              Le plus simple reste le courriel — nous répondons en quelques jours. Le jour du
+              Le plus simple reste le courriel — nous répondons en quelques heures. Le jour du
               mariage, adressez-vous directement à Arlette, notre planificatrice.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 26, margin: "26px 0 0" }}>
