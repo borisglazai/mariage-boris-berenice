@@ -14,10 +14,25 @@ const figtree = Figtree({
   display: "swap",
 });
 
+const title = "Boris & Bérénice — 3 octobre 2026";
+const description =
+  "Boris et Bérénice se marient le 3 octobre 2026 à Ottawa et Bourget. Toutes les informations et le formulaire de réponse.";
+
 export const metadata = {
-  title: "Boris & Bérénice — 3 octobre 2026",
-  description:
-    "Boris et Bérénice se marient le 3 octobre 2026 à Ottawa et Bourget. Toutes les informations et le formulaire de réponse.",
+  metadataBase: new URL("https://mariage-boris-berenice.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    locale: "fr_CA",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }) {
