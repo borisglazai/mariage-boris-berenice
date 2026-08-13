@@ -112,6 +112,10 @@ const FAQ = [
     a: "Chaque invité choisit son plat directement dans le formulaire de réponse. Merci de faire ce choix pour chaque personne de votre groupe avant le 1er septembre.",
   },
   {
+    q: "Puis-je modifier ma réponse ?",
+    a: "Oui, à tout moment avant le 1er septembre. Un code personnel vous est donné après l'envoi : il permet de retrouver et modifier votre réponse depuis n'importe quel appareil.",
+  },
+  {
     q: "Les enfants sont-ils bienvenus ?",
     a: "Oui, avec plaisir. Nous n'avons pas prévu de service de garde, les enfants restent donc sous la responsabilité de leurs parents tout au long de la journée. Merci d'indiquer leur nombre dans votre réponse.",
   },
@@ -134,6 +138,10 @@ const FAQ = [
   {
     q: "Jusqu'à quand puis-je répondre ?",
     a: "Le 1er septembre 2026. Après cette date, les quantités sont fixées avec le traiteur et nous ne pouvons plus ajouter de couvert.",
+  },
+  {
+    q: "Que faire si je dois annuler ?",
+    a: "Retrouvez votre réponse avec votre code personnel et repassez sur « Malheureusement non ». Prévenez-nous si possible avant le 1er septembre pour ajuster les quantités avec le traiteur.",
   },
 ];
 
@@ -200,7 +208,7 @@ export default function Home() {
             fontSize: 14.5,
           }}
         >
-          Répondre · RSVP
+          Confirmer ma présence
         </a>
       </nav>
 
@@ -276,6 +284,18 @@ export default function Home() {
             />
             <div
               style={{
+                position: "absolute",
+                left: -44,
+                bottom: -44,
+                width: 150,
+                height: 150,
+                borderRadius: 999,
+                border: "2px solid #c67139",
+                zIndex: 0,
+              }}
+            />
+            <div
+              style={{
                 position: "relative",
                 zIndex: 1,
                 borderRadius: 24,
@@ -289,6 +309,29 @@ export default function Home() {
                 alt="Boris et Bérénice"
                 style={{ display: "block", width: "100%", height: 520, objectFit: "cover", ...photoFilter }}
               />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: -22,
+                right: 20,
+                zIndex: 2,
+                width: 92,
+                height: 92,
+                borderRadius: 999,
+                background: "#201e1d",
+                color: "#f5ead8",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                fontFamily: "var(--font-caprasimo), serif",
+                fontSize: 15,
+                lineHeight: 1.25,
+                boxShadow: "0 12px 24px -12px rgba(32,30,29,0.5)",
+              }}
+            >
+              B<span style={{ color: "#c67139" }}>&amp;</span>B
             </div>
           </div>
         </div>
@@ -394,8 +437,11 @@ export default function Home() {
             </a>
           </div>
           <div className="row3" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 22 }}>
-            {PROGRAMME.map((item) => (
-              <div key={item.heure + item.titre} style={{ background: "#f5ead8", borderRadius: 24, padding: 28 }}>
+            {PROGRAMME.map((item, index) => (
+              <div key={item.heure + item.titre} style={{ background: "#f5ead8", borderRadius: 24, padding: 28, position: "relative" }}>
+                <span style={{ position: "absolute", top: 24, right: 26, fontSize: 13, fontWeight: 700, color: "#c9b898" }}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <p style={{ margin: 0, fontFamily: "var(--font-caprasimo), serif", fontSize: 24, color: item.color }}>
                   {item.heure}
                 </p>
@@ -412,7 +458,7 @@ export default function Home() {
           <p style={eyebrow}>Lieu &amp; itinéraire</p>
           <h2 style={{ ...h2, margin: "0 0 32px" }}>Deux lieux, une seule journée</h2>
 
-          <div className="row2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28, marginBottom: 40 }}>
+          <div className="row2" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 20, marginBottom: 40, alignItems: "center" }}>
             <div style={venueCardStyle}>
               <div>
                 <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: "#a05426", textTransform: "uppercase", letterSpacing: "0.08em" }}>
@@ -439,6 +485,14 @@ export default function Home() {
               >
                 Ouvrir dans Maps
               </a>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 6px" }}>
+              <span style={{ fontFamily: "var(--font-caprasimo), serif", fontSize: 30, color: "#c67139", lineHeight: 1 }}>35</span>
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#6b5f52", whiteSpace: "nowrap" }}>
+                min. de route
+              </span>
+              <span aria-hidden="true" style={{ fontSize: 22, color: "#c67139", lineHeight: 1 }}>→</span>
             </div>
 
             <div style={venueCardStyle}>
@@ -508,9 +562,18 @@ export default function Home() {
               veste ou une étole pour le déplacement entre l&apos;église et la salle.
             </p>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
-            {["#c67139", "#7a8a5e", "#eccfae", "#6b5f52", "#a05426", "#5d6b45"].map((c) => (
-              <div key={c} style={{ width: 108, height: 108, borderRadius: 999, background: c }} />
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 20 }}>
+            {[
+              { nom: "Terracotta", couleur: "#c67139" },
+              { nom: "Sauge", couleur: "#7a8a5e" },
+              { nom: "Crème", couleur: "#eccfae" },
+              { nom: "Brun chaud", couleur: "#6b5f52" },
+              { nom: "Doré", couleur: "#c9a227" },
+            ].map((t) => (
+              <div key={t.nom} style={{ display: "grid", justifyItems: "center", gap: 10 }}>
+                <div style={{ width: 84, height: 116, borderRadius: "999px 999px 14px 14px", background: t.couleur }} />
+                <span style={{ fontSize: 13, color: "#ded1bb" }}>{t.nom}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -644,7 +707,7 @@ export default function Home() {
           </div>
           <div style={{ display: "grid", gap: 14, alignContent: "start" }}>
             <a href="#rsvp" className="btn-fill" style={{ color: "#fbf5ea", padding: "14px 26px", borderRadius: 999, fontWeight: 700, textAlign: "center" }}>
-              Répondre à l&apos;invitation
+              Confirmer ma présence
             </a>
             <a
               href="https://maps.google.com/?q=4090+Belgreen+Drive+Ottawa+ON+K1G+3N2"
