@@ -38,6 +38,15 @@ const mapFrameStyle = {
   display: "block",
 };
 
+const GOOGLE_CALENDAR_URL =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent("Mariage de Boris & Bérénice") +
+  "&dates=" + "20261003T153000Z/20261004T020000Z" +
+  "&details=" + encodeURIComponent(
+    "Cérémonie à l'église Vases d'Honneur Ottawa de 11 h 30 à 14 h 30, puis réception au Centre communautaire de Bourget (19, rue Lavigne, Bourget, ON) à partir de 15 h 30. Détails complets : https://mariage-boris-berenice.vercel.app"
+  ) +
+  "&location=" + encodeURIComponent("Église Vases d'Honneur Ottawa, 4090 Belgreen Drive, unité 4, Ottawa, ON K1G 3N2");
+
 const PROGRAMME = [
   {
     heure: "11 h 30",
@@ -361,10 +370,29 @@ export default function Home() {
         <div style={{ maxWidth: 1240 }}>
           <p style={eyebrow}>Le jour J</p>
           <h2 style={{ ...h2, margin: "0 0 12px" }}>Samedi 3 octobre, heure par heure</h2>
-          <p style={{ margin: "0 0 44px", fontSize: 16, color: "#6b5f52" }}>
+          <p style={{ margin: "0 0 24px", fontSize: 16, color: "#6b5f52" }}>
             Notre journée se déroule en deux lieux : la cérémonie à Ottawa, puis la réception à
             Bourget. Comptez environ 35 minutes de route entre les deux.
           </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, margin: "0 0 44px" }}>
+            <a
+              href={GOOGLE_CALENDAR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+              style={{ border: "1.5px solid #201e1d", color: "#201e1d", padding: "11px 20px", borderRadius: 999, fontWeight: 600, fontSize: 14.5 }}
+            >
+              + Google Agenda
+            </a>
+            <a
+              href="/mariage-boris-berenice.ics"
+              download
+              className="btn-outline"
+              style={{ border: "1.5px solid #201e1d", color: "#201e1d", padding: "11px 20px", borderRadius: 999, fontWeight: 600, fontSize: 14.5 }}
+            >
+              + Apple / Outlook (.ics)
+            </a>
+          </div>
           <div className="row3" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 22 }}>
             {PROGRAMME.map((item) => (
               <div key={item.heure + item.titre} style={{ background: "#f5ead8", borderRadius: 24, padding: 28 }}>

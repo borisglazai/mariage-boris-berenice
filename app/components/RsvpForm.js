@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+const STOCKAGE_CLE = "rsvp-boris-berenice";
 
 const MENU_OPTIONS = [
   "Riz gras au poulet",
@@ -83,14 +84,54 @@ function resizePersonnes(personnes, nombre) {
   return next;
 }
 
+const ETAT_INITIAL = {
+  nom: "",
+  email: "",
+  tel: "",
+  presence: "",
+  nombre: 2,
+  enfants: "Aucun enfant",
+  allergies: "",
+  message: "",
+  personnes: resizePersonnes([], 2),
+};
+
 export default function RsvpForm() {
-  const [nom, setNom] = useState("");
-  const [presence, setPresence] = useState("");
-  const [nombre, setNombre] = useState(2);
-  const [personnes, setPersonnes] = useState(() => resizePersonnes([], 2));
+  const [nom, setNom] = useState(ETAT_INITIAL.nom);
+  const [email, setEmail] = useState(ETAT_INITIAL.email);
+  const [tel, setTel] = useState(ETAT_INITIAL.tel);
+  const [presence, setPresence] = useState(ETAT_INITIAL.presence);
+  const [nombre, setNombre] = useState(ETAT_INITIAL.nombre);
+  const [enfants, setEnfants] = useState(ETAT_INITIAL.enfants);
+  const [allergies, setAllergies] = useState(ETAT_INITIAL.allergies);
+  const [message, setMessage] = useState(ETAT_INITIAL.message);
+  const [personnes, setPersonnes] = useState(ETAT_INITIAL.personnes);
   const [personne1Touchee, setPersonne1Touchee] = useState(false);
+  const [dejaRepondu, setDejaRepondu] = useState(false);
   const [configErreur, setConfigErreur] = useState("");
   const [state, handleSubmit, reset] = useForm(FORMSPREE_ID || "");
+
+  useEffect(() => {
+    let sauvegarde = null;
+    try {
+      sauvegarde = JSON.parse(localStorage.getItem(STOCKAGE_CLE) || "null");
+    } catch {
+      sauvegarde = null;
+    }
+    if (!sauvegarde) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrating from localStorage, client-only by nature
+    setNom(sauvegarde.nom || "");
+    setEmail(sauvegarde.email || "");
+    setTel(sauvegarde.tel || "");
+    setPresence(sauvegarde.presence || "");
+    setNombre(sauvegarde.nombre || 2);
+    setEnfants(sauvegarde.enfants || "Aucun enfant");
+    setAllergies(sauvegarde.allergies || "");
+    setMessage(sauvegarde.message || "");
+    setPersonnes(resizePersonnes(sauvegarde.personnes || [], sauvegarde.nombre || 2));
+    setPersonne1Touchee(true);
+    setDejaRepondu(true);
+  }, []);
 
   function changerNombre(e) {
     const n = Number(e.target.value);
@@ -115,13 +156,8 @@ export default function RsvpForm() {
     });
   }
 
-  function reinitialiser() {
+  function modifierReponse() {
     reset();
-    setNom("");
-    setPresence("");
-    setNombre(2);
-    setPersonnes(resizePersonnes([], 2));
-    setPersonne1Touchee(false);
   }
 
   function envoyer(e) {
@@ -138,6 +174,14 @@ export default function RsvpForm() {
       return;
     }
     setConfigErreur("");
+    try {
+      localStorage.setItem(
+        STOCKAGE_CLE,
+        JSON.stringify({ nom, email, tel, presence, nombre, enfants, allergies, message, personnes })
+      );
+    } catch {
+      // stockage indisponible (navigation privée, etc.) — l'envoi continue normalement
+    }
     handleSubmit(e);
   }
 
@@ -166,7 +210,7 @@ export default function RsvpForm() {
         </p>
         <button
           type="button"
-          onClick={reinitialiser}
+          onClick={modifierReponse}
           className="btn-outline"
           style={{
             marginTop: 22,
@@ -204,6 +248,13 @@ export default function RsvpForm() {
         maxWidth: 860,
       }}
     >
+      {dejaRepondu && (
+        <p style={{ margin: 0, fontSize: 14, color: "#7a8a5e", fontWeight: 600 }}>
+          Nous avons retrouvé votre réponse précédente sur cet appareil — modifiez ce qu&apos;il faut,
+          l&apos;envoi remplacera votre réponse dans notre suivi.
+        </p>
+      )}
+
       <div className="row2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
         <label style={labelStyle}>
           Nom et prénom
@@ -219,12 +270,28 @@ export default function RsvpForm() {
         </label>
         <label style={labelStyle}>
           Courriel
-          <input name="email" type="email" required placeholder="vous@exemple.com" style={inputStyle} />
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="vous@exemple.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={inputStyle}
+          />
           <ValidationError prefix="Courriel" field="email" errors={state.errors} style={errorTextStyle} />
         </label>
         <label style={labelStyle}>
           Téléphone
-          <input name="tel" type="tel" required placeholder="613 000-0000" style={inputStyle} />
+          <input
+            name="tel"
+            type="tel"
+            required
+            placeholder="613 000-0000"
+            value={tel}
+            onChange={(e) => setTel(e.target.value)}
+            style={inputStyle}
+          />
         </label>
       </div>
 
@@ -256,7 +323,7 @@ export default function RsvpForm() {
             </label>
             <label style={labelStyle}>
               Enfants
-              <select name="enfants" style={selectStyle} defaultValue="Aucun enfant">
+              <select name="enfants" value={enfants} onChange={(e) => setEnfants(e.target.value)} style={selectStyle}>
                 <option>Aucun enfant</option>
                 <option>1 enfant</option>
                 <option>2 enfants</option>
@@ -310,14 +377,27 @@ export default function RsvpForm() {
 
           <label style={labelStyle}>
             Allergies ou restrictions alimentaires
-            <input name="allergies" placeholder="Facultatif" style={inputStyle} />
+            <input
+              name="allergies"
+              placeholder="Facultatif"
+              value={allergies}
+              onChange={(e) => setAllergies(e.target.value)}
+              style={inputStyle}
+            />
           </label>
         </div>
       )}
 
       <label style={labelStyle}>
         Un mot pour les mariés
-        <textarea name="message" rows={4} placeholder="Facultatif" style={textareaStyle} />
+        <textarea
+          name="message"
+          rows={4}
+          placeholder="Facultatif"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          style={textareaStyle}
+        />
       </label>
 
       <div style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
@@ -336,7 +416,7 @@ export default function RsvpForm() {
             opacity: state.submitting ? 0.7 : 1,
           }}
         >
-          {state.submitting ? "Envoi…" : "Envoyer ma réponse"}
+          {state.submitting ? "Envoi…" : dejaRepondu ? "Renvoyer ma réponse" : "Envoyer ma réponse"}
         </button>
         <span style={{ fontSize: 14.5, color: erreurGenerale ? "#a05426" : "#6b5f52" }}>
           {erreurGenerale || "Réponse à envoyer avant le 1er septembre 2026."}

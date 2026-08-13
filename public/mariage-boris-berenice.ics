@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Boris et Berenice//Mariage 2026//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:boris-berenice-mariage-2026@mariage-boris-berenice.vercel.app
+DTSTAMP:20260813T000000Z
+DTSTART:20261003T153000Z
+DTEND:20261004T020000Z
+SUMMARY:Mariage de Boris & Bérénice
+LOCATION:Église Vases d'Honneur Ottawa\, 4090 Belgreen Drive\, unité 4\, Ottawa\, ON K1G 3N2
+DESCRIPTION:Cérémonie à l'église Vases d'Honneur Ottawa de 11 h 30 à 14 h 30\, puis réception au Centre communautaire de Bourget (19\, rue Lavigne\, Bourget\, ON) à partir de 15 h 30. Détails complets : https://mariage-boris-berenice.vercel.app
+END:VEVENT
+END:VCALENDAR
